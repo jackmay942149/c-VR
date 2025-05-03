@@ -1,3 +1,3 @@
 @echo off
 call build.bat
-"./build/main.exe"
+"./build/Debug/c-VR.exe"

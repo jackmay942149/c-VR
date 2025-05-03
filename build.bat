@@ -1,3 +1,4 @@
 @echo off
-set SRC_FILES=src/main.c 
-gcc -Wall -Wextra -Werror -std=c23 -pedantic -o build/main %SRC_FILES%
+cd ./build
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
+cd ../
