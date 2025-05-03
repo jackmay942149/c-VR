@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include "color.c"
+#include "file-manager.c"
 
 int main(void){
+  
+}
   /* File Manager Test Stuff
   
   FileManager fileManager = FileManager_Init();
@@ -24,4 +27,3 @@ int main(void){
 
   FileManager_CloseAll(&fileManager);
   */
-}
