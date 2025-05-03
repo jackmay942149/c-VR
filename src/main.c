@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include "color.c"
 #include "file-manager.c"
+#include "math/math.c"
 
 int main(void){
-  
+  Vec2f a = {.u = 1.0f, .v = 1.0f};
+  Vec2f b = Vec2f_AddFloat(a, 2.5);
+  printf("hello");
 }
   /* File Manager Test Stuff
   
