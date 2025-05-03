@@ -1,29 +1,68 @@
 #include "vector.h"
+#include <math.h>
 
-// Vec2 Functions
+// -- Vec2 Functions -- //
 Vec2f Vec2f_AddFloat(Vec2f vec, float f) {
   Vec2f v = {.u = vec.u + f, .v = vec.v + f};
   return v;
 }
 
-Vec2f Vec2f_AddVec2(Vec2f a, Vec2f b);
-Vec2f Vec2f_Multiply(Vec2f vec, float f);
-float Vec2f_Dot(Vec2f a, Vec2f b);
-Vec2f Vec2f_Normailze(Vec2f vec);
-float Vec2f_Magnitude(Vec2f vec);
-Vec2f Vec2f_Orthogonal(Vec2f vec);
+Vec2f Vec2f_AddVec2(Vec2f a, Vec2f b) {
+  Vec2f v = {.u = a.u + b.u, .v = a.v + b.v};
+  return v;
+}
 
-// Vec3 Functions
-Vec3f Vec3f_AddFloat(Vec3f vec, float f);
-Vec3f Vec3f_AddVec3(Vec3f a, Vec3f b);
-Vec3f Vec3f_Multiply(Vec3f vec, float f);
-float Vec3f_Dot(Vec3f a, Vec3f b);
+Vec2f Vec2f_Multiply(Vec2f vec, float f) {
+  Vec2f v = {.u = vec.u * f, .v = vec.v * f};
+  return v;  
+}
+
+float Vec2f_Dot(Vec2f a, Vec2f b) {
+  return (a.u * b.u + a.v * b.v);  
+}
+
+float Vec2f_Magnitude(Vec2f vec) {
+  return sqrt(vec.u * vec.u + vec.v * vec.v);
+}
+
+Vec2f Vec2f_Normailze(Vec2f vec) {
+  float f = Vec2f_Magnitude(vec);
+  Vec2f v = {.u = vec.u/f, .v = vec.v/f};
+  return v;
+}
+
+// Returns Anti-Clockwise Orthogonal, Vec2f_Multiply(result, -1.0) will give clockwise
+Vec2f Vec2f_Orthogonal(Vec2f vec) {
+  Vec2f v = {.u = -vec.v, .v = vec.u};
+  return v;
+}
+
+// -- Vec3 Functions -- //
+Vec3f Vec3f_AddFloat(Vec3f vec, float f) {
+  Vec3f v = {.x = vec.x + f, .y = vec.y + f, .z = vec.z + f};
+  return v;
+}
+
+Vec3f Vec3f_AddVec3(Vec3f a, Vec3f b) {
+  Vec3f v = {.x = a.x * b.x, .y = a.y * b.y, .z = a.z * b.z};
+  return v;
+}
+
+Vec3f Vec3f_Multiply(Vec3f vec, float f) {
+  Vec3f v = {.x = vec.x * f, .y = vec.y * f, .z = vec.z * f};
+  return v;
+}
+
+float Vec3f_Dot(Vec3f a, Vec3f b) {
+    return (a.x * b.x + a.y * b.y + a.z * b.z);
+}
+
 Vec3f Vec3f_Normailze(Vec3f vec);
 float Vec3f_Magnitude(Vec3f vec);
 float Vec3f_Cross(Vec3f vec);
 Vec3f Vec3f_Orthogonal(Vec3f vec);
 
-// Vec4 Functions
+// -- Vec4 Functions -- //
 Vec4f Vec4f_AddFloat(Vec4f vec, float f);
 Vec4f Vec4f_AddVec4(Vec4f a, Vec4f b);
 Vec4f Vec4f_Multiply(Vec4f vec, float f);
