@@ -57,17 +57,47 @@ float Vec3f_Dot(Vec3f a, Vec3f b) {
     return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
-Vec3f Vec3f_Normailze(Vec3f vec);
-float Vec3f_Magnitude(Vec3f vec);
-float Vec3f_Cross(Vec3f vec);
-Vec3f Vec3f_Orthogonal(Vec3f vec);
+float Vec3f_Magnitude(Vec3f vec) {
+  return (float) pow(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z, 1.0/3);
+}
+
+Vec3f Vec3f_Normailze(Vec3f vec) {
+  float f = Vec3f_Magnitude(vec);
+  Vec3f v = {.x = vec.x/f, .y = vec.y/f, .z = vec.z/f};
+  return v;
+}
+
+Vec3f Vec3f_Cross(Vec3f a, Vec3f b) {
+  Vec3f v = {.x = a.y * b.z - b.y * a.z, .y = a.x * b.z - b.x * a.z, .z = a.x * b.y - b.x * a.y};
+  return v;
+}
 
 // -- Vec4 Functions -- //
-Vec4f Vec4f_AddFloat(Vec4f vec, float f);
-Vec4f Vec4f_AddVec4(Vec4f a, Vec4f b);
-Vec4f Vec4f_Multiply(Vec4f vec, float f);
-float Vec4f_Dot(Vec4f a, Vec4f b);
-Vec4f Vec4f_Normailze(Vec4f vec);
-float Vec4f_Magnitude(Vec4f vec);
-float Vec4f_Cross(Vec4f vec);
-Vec4f Vec4f_Orthogonal(Vec4f vec);
+Vec4f Vec4f_AddFloat(Vec4f vec, float f) {
+  Vec4f v = {.x = vec.x + f, .y = vec.y + f, .z = vec.z + f, .w = vec.w + f};
+  return v;
+}
+
+Vec4f Vec4f_AddVec4(Vec4f a, Vec4f b) {
+  Vec4f v = {.x = a.x + b.x, .y = a.y + b.y, .z = a.z + b.z, .w = a.w + b.w};
+  return v;
+}
+
+Vec4f Vec4f_Multiply(Vec4f vec, float f) {
+  Vec4f v = {.x = vec.x * f, .y = vec.y * f, .z = vec.z * f, .w = vec.w * f};
+  return v;
+}
+
+float Vec4f_Dot(Vec4f a, Vec4f b) {
+  return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
+}
+
+float Vec4f_Magnitude(Vec4f vec) {
+  return (float) pow(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z + vec.w * vec.w, 1.0/4);
+}
+
+Vec4f Vec4f_Normailze(Vec4f vec) {
+  float f = Vec4f_Magnitude(vec);
+  Vec4f v = {.x = vec.x/f, .y = vec.y/f, .z = vec.z/f, .w = vec.w/f};
+  return v;
+}
