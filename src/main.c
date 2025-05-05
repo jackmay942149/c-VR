@@ -1,19 +1,40 @@
 #include "file-manager.h"
 #include "math/math.c"
 #include "renderer.h"
+#include "glfw3.h"
+#include <gl/gl.h>
 
 int main(void){
 
+  // Initialize GLFW
+  glfwInit();  
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
+
+  // Initialize window need to initialize glad before this
+  GLFWwindow* window = glfwCreateWindow(800, 600, "c-VR", NULL, NULL);
+  if (window == NULL) {
+    printf("Failed to create GLFW window");
+    glfwTerminate();
+    return -1;
+  }
+  glfwMakeContextCurrent(window);
+
+  glViewport(0, 0, 800, 600);
+
+  while (!glfwWindowShouldClose(window)) {
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+  }
+
+  glfwTerminate();
+    
   Renderer renderer = Renderer_Init(20, 10);
   Renderer_Update(renderer);
   
   FileManager fileManager = FileManager_Init();
-#ifdef _MSC_VER
   File file = FileManager_OpenFile(&fileManager, "res/output.ppm");
-#else
-  File file = FileManager_OpenFile(&fileManager, "res/output.ppm");
-#endif
-
   FileManager_WriteRendererToPPM(file, renderer);
   FileManager_CloseAll(&fileManager);
 

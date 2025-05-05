@@ -1,25 +1,25 @@
 [
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -o CMakeFiles\\c-VR.dir\\src\\main.c.obj -c C:\\dev\\c-VR\\src\\main.c",
+  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\main.c.obj -c C:\\dev\\c-VR\\src\\main.c",
   "file": "C:\\dev\\c-VR\\src\\main.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\main.c.obj"
 },
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -o CMakeFiles\\c-VR.dir\\src\\color.c.obj -c C:\\dev\\c-VR\\src\\color.c",
+  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\color.c.obj -c C:\\dev\\c-VR\\src\\color.c",
   "file": "C:\\dev\\c-VR\\src\\color.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\color.c.obj"
 },
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -o CMakeFiles\\c-VR.dir\\src\\file-manager.c.obj -c C:\\dev\\c-VR\\src\\file-manager.c",
+  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\file-manager.c.obj -c C:\\dev\\c-VR\\src\\file-manager.c",
   "file": "C:\\dev\\c-VR\\src\\file-manager.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\file-manager.c.obj"
 },
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -o CMakeFiles\\c-VR.dir\\src\\renderer.c.obj -c C:\\dev\\c-VR\\src\\renderer.c",
+  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\renderer.c.obj -c C:\\dev\\c-VR\\src\\renderer.c",
   "file": "C:\\dev\\c-VR\\src\\renderer.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\renderer.c.obj"
 }

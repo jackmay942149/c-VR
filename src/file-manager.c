@@ -35,7 +35,5 @@ void FileManager_WriteRendererToPPM(File file, Renderer renderer) {
   for(int i = 0; i < renderer.data->size; i++) {
       Color3i color = renderer.data->buffer[i];
       fprintf(file.file, "%i %i %i\n", color.r, color.g, color.b);
-      printf("%i %i %i\n", color.r, color.g, color.b);
-            
   }
 } 
