@@ -1,8 +1,8 @@
 #include "file-manager.h"
 #include "math/math.c"
 #include "renderer.h"
+#include "glad.h"
 #include "glfw3.h"
-#include <gl/gl.h>
 
 int main(void){
 
@@ -10,7 +10,7 @@ int main(void){
   glfwInit();  
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   // Initialize window need to initialize glad before this
   GLFWwindow* window = glfwCreateWindow(800, 600, "c-VR", NULL, NULL);
@@ -20,6 +20,13 @@ int main(void){
     return -1;
   }
   glfwMakeContextCurrent(window);
+
+  // Initialize GLAD
+  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+  {
+      printf("Failed to initialize GLAD");
+      return -1;
+  }
 
   glViewport(0, 0, 800, 600);
 
