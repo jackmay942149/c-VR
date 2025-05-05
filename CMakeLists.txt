@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(SOURCEFILES ./src/main.c ./src/color.c ./src/file-manager.c ./src/renderer.c)
 project(c-VR VERSION 1.0)
-add_executable(c-VR ./src/main.c ./src/file-manager.c)
+add_executable(c-VR ${SOURCEFILES})
