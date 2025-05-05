@@ -3,6 +3,7 @@
 
 #define MAX_FILES 10
 #include <stdio.h>
+#include "renderer.h"
 
 typedef struct File {
   FILE* file;
@@ -16,6 +17,7 @@ typedef struct FileManager {
 
 FileManager FileManager_Init();
 void FileManager_CloseAll(FileManager* fileManager);
-FILE* FileManager_OpenFile(FileManager* fileManger, char* path);
+File FileManager_OpenFile(FileManager* fileManger, char* path);
+void FileManager_WriteRendererToPPM(File file, Renderer renderer);
 
 #endif
