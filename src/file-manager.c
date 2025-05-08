@@ -13,19 +13,20 @@ void FileManager_CloseAll(FileManager* fileManager) {
 
 File FileManager_OpenFile(FileManager* fileManager, char* path) {
   FILE* osFile;
-  osFile = fopen(path, "w");
+  osFile = fopen(path, "rb+");
 
   if (osFile == NULL) {
       printf("Error Loading File");
   }
-
-  fseek(osFile, 0, SEEK_END);
-  long fileLength = ftell(osFile);
-  File file = {.file = osFile, .sizeBytes = fileLength};
-  fileManager->files[fileManager->count] = file;
-  fileManager->count++;
-  fseek(osFile, 0, SEEK_SET);
-  return file;
+  else {
+      fseek(osFile, 0, SEEK_END);
+      long fileLength = ftell(osFile);
+      File file = { .file = osFile, .sizeBytes = fileLength };
+      fileManager->files[fileManager->count] = file;
+      fileManager->count++;
+      fseek(osFile, 0, SEEK_SET);
+      return file;
+  }
 }
 
 void FileManager_WriteRendererToPPM(File file, Renderer renderer) {

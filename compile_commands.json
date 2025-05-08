@@ -22,5 +22,11 @@
   "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\renderer.c.obj -c C:\\dev\\c-VR\\src\\renderer.c",
   "file": "C:\\dev\\c-VR\\src\\renderer.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\renderer.c.obj"
+},
+{
+  "directory": "C:/dev/c-VR/build",
+  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\include\\glad.c.obj -c C:\\dev\\c-VR\\include\\glad.c",
+  "file": "C:\\dev\\c-VR\\include\\glad.c",
+  "output": "CMakeFiles\\c-VR.dir\\include\\glad.c.obj"
 }
 ]
