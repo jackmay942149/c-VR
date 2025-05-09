@@ -2,6 +2,7 @@
 #include "file-manager.h"
 #include "math/math.c"
 #include "renderer.h"
+#include "shader.h"
 #include "glad.h"
 #include "glfw3.h"
 
@@ -33,12 +34,14 @@ int main(void){
 
   glViewport(0, 0, 800, 600);
 
+  // Set vertex data
   float vertices[] = {
     -0.5f, -0.5f, 0.0f,
      0.5f, -0.5f, 0.0f,
      0.0f,  0.5f, 0.0f
   };
 
+  // Initialize VAO
   unsigned int VAO;
   glGenVertexArrays(1, &VAO);
   glBindVertexArray(VAO);
@@ -50,70 +53,41 @@ int main(void){
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-  // Compile Vertex Shader
-  File vertexShaderSrc = FileManager_OpenFile(&fileManager, "../res/default.vert");
+  // Read shader file and convert to char*
+  //
+  // TODO: Shader abstraction
+  // 
+  // Struct: Shader type, int id
+  // Create Shader(shader type, &id, &filemanager, path)
+  // Error check(shader)
+  // Link shader(shader vertex, shade frag)
+  Shader vertShader = Shader_Create(VERTEX, &fileManager, "../res/default.vert");
 
-  char* vertexShaderData = (char*)malloc(vertexShaderSrc.sizeBytes + 1);
-  if (!vertexShaderData) {
-      fprintf(stderr, "Memory allocation failed.\n");
-      exit(1);
-  }
-
-  // Read and null-terminate
-  fread((void*)vertexShaderData, 1, vertexShaderSrc.sizeBytes, vertexShaderSrc.file);
-  vertexShaderData[vertexShaderSrc.sizeBytes] = '\0';
-  
-  unsigned int vertexShader;
-  vertexShader = glCreateShader(GL_VERTEX_SHADER); 
-  glShaderSource(vertexShader, 1, &vertexShaderData, NULL);
-  glCompileShader(vertexShader);
-
+  // Error checking shader compilation
   int  success;
   char infoLog[512];
-  glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+  glGetShaderiv(vertShader.id, GL_COMPILE_STATUS, &success);
 
   if (!success)
   {
-      glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+      glGetShaderInfoLog(vertShader.id, 512, NULL, infoLog);
       printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n");
   }
 
-  free((void*)vertexShaderData);
-  vertexShaderData = NULL;
+  Shader fragShader = Shader_Create(FRAGMENT, &fileManager, "../res/default.frag");
 
-  // Compile Frag Shader
-  File fragShaderSrc = FileManager_OpenFile(&fileManager, "../res/default.frag");
-
-  char* fragShaderData = (char*)malloc(fragShaderSrc.sizeBytes + 1);
-  if (!fragShaderData) {
-      fprintf(stderr, "Memory allocation failed.\n");
-      exit(1);
-  }
-
-  // Read and null-terminate
-  fread(fragShaderData, 1, fragShaderSrc.sizeBytes, fragShaderSrc.file);
-  fragShaderData[fragShaderSrc.sizeBytes] = '\0';
-
-  unsigned int fragShader;
-  fragShader = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fragShader, 1, &fragShaderData, NULL);
-  glCompileShader(fragShader);
-
-  glGetShaderiv(fragShader, GL_COMPILE_STATUS, &success);
+  glGetShaderiv(fragShader.id, GL_COMPILE_STATUS, &success);
 
   if (!success)
   {
-      glGetShaderInfoLog(fragShader, 512, NULL, infoLog);
+      glGetShaderInfoLog(fragShader.id, 512, NULL, infoLog);
       printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n");
   }
 
-  free(fragShaderData);
-  fragShaderData = NULL;
-
   unsigned int shaderProgram;
   shaderProgram = glCreateProgram();
-  glAttachShader(shaderProgram, vertexShader);
-  glAttachShader(shaderProgram, fragShader);
+  glAttachShader(shaderProgram, vertShader.id);
+  glAttachShader(shaderProgram, fragShader.id);
   glLinkProgram(shaderProgram);
 
   glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
@@ -124,19 +98,12 @@ int main(void){
   }
 
 
-
-
-  
-
-  
- 
-
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
   glEnableVertexAttribArray(0);
 
   glUseProgram(shaderProgram);
-  glDeleteShader(vertexShader);
-  glDeleteShader(fragShader);
+  glDeleteShader(vertShader.id);
+  glDeleteShader(fragShader.id);
 
 
 
