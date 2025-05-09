@@ -60,7 +60,7 @@ int main(void){
   }
 
   // Read and null-terminate
-  fread(vertexShaderData, 1, vertexShaderSrc.sizeBytes, vertexShaderSrc.file);
+  fread((void*)vertexShaderData, 1, vertexShaderSrc.sizeBytes, vertexShaderSrc.file);
   vertexShaderData[vertexShaderSrc.sizeBytes] = '\0';
   
   unsigned int vertexShader;
@@ -78,7 +78,7 @@ int main(void){
       printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n");
   }
 
-  free(vertexShaderData);
+  free((void*)vertexShaderData);
   vertexShaderData = NULL;
 
   // Compile Frag Shader
@@ -152,13 +152,15 @@ int main(void){
   glfwTerminate();
 
   
-    
+  /*
   Renderer renderer = Renderer_Init(20, 10);
   Renderer_Update(renderer);
   
   File file = FileManager_OpenFile(&fileManager, "../res/output.ppm");
   FileManager_WriteRendererToPPM(file, renderer);
+  */
+
   FileManager_CloseAll(&fileManager);
 
-  Renderer_Quit(&renderer);
+  //Renderer_Quit(&renderer);
 }
