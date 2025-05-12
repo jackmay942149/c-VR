@@ -6,9 +6,14 @@
 #include "glad.h"
 #include "glfw3.h"
 
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
 int main(void){
   // Add file loader
   FileManager fileManager = FileManager_Init();
+
+  // Window Abstraction
   
   // Initialize GLFW
   glfwInit();  
@@ -24,7 +29,8 @@ int main(void){
     return -1;
   }
   glfwMakeContextCurrent(window);
-
+  glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+  
   // Initialize GLAD
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
   {
@@ -33,12 +39,23 @@ int main(void){
   }
 
   glViewport(0, 0, 800, 600);
+  
+  // scene abstraction
+  // scene is array of objects
+  // object has vertices, vao, vbo, shaderprogram
+  // make object abstraction first do window before that
 
   // Set vertex data
   float vertices[] = {
-    -0.5f, -0.5f, 0.0f,
+     0.5f,  0.5f, 0.0f,
      0.5f, -0.5f, 0.0f,
-     0.0f,  0.5f, 0.0f
+    -0.5f, -0.5f, 0.0f,
+    -0.5f,  0.5f, 0.0f
+  };
+
+  unsigned int indices[] = {
+    0, 1, 3,
+    1, 2, 3
   };
 
   // Initialize VAO
@@ -53,64 +70,29 @@ int main(void){
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-  // Read shader file and convert to char*
-  //
-  // TODO: Shader abstraction
-  // 
-  // Struct: Shader type, int id
-  // Create Shader(shader type, &id, &filemanager, path)
-  // Error check(shader)
-  // Link shader(shader vertex, shade frag)
+  // Initialise EBO
+  unsigned int EBO;
+  glGenBuffers(1, &EBO);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+  
   Shader vertShader = Shader_Create(VERTEX, &fileManager, "../res/default.vert");
-
-  // Error checking shader compilation
-  int  success;
-  char infoLog[512];
-  glGetShaderiv(vertShader.id, GL_COMPILE_STATUS, &success);
-
-  if (!success)
-  {
-      glGetShaderInfoLog(vertShader.id, 512, NULL, infoLog);
-      printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n");
-  }
-
   Shader fragShader = Shader_Create(FRAGMENT, &fileManager, "../res/default.frag");
-
-  glGetShaderiv(fragShader.id, GL_COMPILE_STATUS, &success);
-
-  if (!success)
-  {
-      glGetShaderInfoLog(fragShader.id, 512, NULL, infoLog);
-      printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n");
-  }
-
-  unsigned int shaderProgram;
-  shaderProgram = glCreateProgram();
-  glAttachShader(shaderProgram, vertShader.id);
-  glAttachShader(shaderProgram, fragShader.id);
-  glLinkProgram(shaderProgram);
-
-  glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-  if (!success) {
-      glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-      printf("ERROR::SHADER::PROGRAM::LINKING_FAILED\n");
-      printf(infoLog);
-  }
-
+  Shader linkShader = Shader_Link(vertShader, fragShader);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
   glEnableVertexAttribArray(0);
 
-  glUseProgram(shaderProgram);
+  glUseProgram(linkShader.id);
   glDeleteShader(vertShader.id);
   glDeleteShader(fragShader.id);
 
-
-
   while (!glfwWindowShouldClose(window)) {
-    glUseProgram(shaderProgram);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    glUseProgram(linkShader.id);
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
@@ -119,7 +101,7 @@ int main(void){
   glfwTerminate();
 
   
-  /*
+  /* Software Renderer Logic
   Renderer renderer = Renderer_Init(20, 10);
   Renderer_Update(renderer);
   
@@ -131,3 +113,9 @@ int main(void){
 
   //Renderer_Quit(&renderer);
 }
+
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+} 

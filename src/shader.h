@@ -15,7 +15,7 @@ typedef struct Shader {
 } Shader;
 
 Shader Shader_Create(enum E_ShaderType shaderType, FileManager* fileManager, char* path);
-int Shader_ErrorCheck(Shader shader);
+void Shader_ErrorCheck(Shader shader);
 Shader Shader_Link(Shader vertex, Shader frag);
 
 #endif
