@@ -1,6 +1,8 @@
 #include "application.h"
 #include "file-manager.h"
-#include "math/math.c"
+#include "glfw3.h"
+#include "math/matrix.h"
+#include "math/vector.h"
 #include "object.h"
 #include "shader.h"
 #include "glad.h"
@@ -35,16 +37,25 @@ int main(void){
   glDeleteShader(vertShader.id);
   glDeleteShader(fragShader.id);
 
+  FileManager_CloseAll(&fileManager);
 
   Object o1 = Object_StackAllocate(
     vertices, sizeof(vertices),
     indices, sizeof(indices),
     linkShader);
-  
+
+
   while (application.isRunning) { // application running
     glClear(GL_COLOR_BUFFER_BIT);
     
     glUseProgram(o1.shaderProgram.id);
+    Mat4f transform = Mat4f_Identity();
+    Vec3f rotAxis = {.x = 0, .y = 0, .z = 1};
+    Mat4f_Rotate(&transform, (float) glfwGetTime(), rotAxis);
+
+  
+    unsigned int transformLoc = glGetUniformLocation(o1.shaderProgram.id, "transform");
+    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, (float*) &transform);  
     glBindVertexArray(o1.VAO);       // foreach object draw
     glDrawElements(GL_TRIANGLES, o1.iCount, GL_UNSIGNED_INT, 0);
     
@@ -52,7 +63,6 @@ int main(void){
   }
 
   Application_Close(&application);
-  FileManager_CloseAll(&fileManager);
 }
 
 

@@ -83,8 +83,13 @@ Vec4f Vec4f_AddVec4(Vec4f a, Vec4f b) {
   return v;
 }
 
-Vec4f Vec4f_Multiply(Vec4f vec, float f) {
+Vec4f Vec4f_MultiplyFloat(Vec4f vec, float f) {
   Vec4f v = {.x = vec.x * f, .y = vec.y * f, .z = vec.z * f, .w = vec.w * f};
+  return v;
+}
+
+Vec4f Vec4f_MultiplyVec4(Vec4f a, Vec4f b) {
+  Vec4f v = {.x = a.x * b.x, .y = a.y * b.y, .z = a.z * b.z, .w = a.w * b.w};
   return v;
 }
 

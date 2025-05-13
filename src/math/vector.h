@@ -40,7 +40,8 @@ Vec3f Vec3f_Cross(Vec3f a, Vec3f b);
 // -- Vec4 Functions -- //
 Vec4f Vec4f_AddFloat(Vec4f vec, float f);
 Vec4f Vec4f_AddVec4(Vec4f a, Vec4f b);
-Vec4f Vec4f_Multiply(Vec4f vec, float f);
+Vec4f Vec4f_MultiplyFloat(Vec4f vec, float f);
+Vec4f Vec4f_MultiplyVec4(Vec4f a, Vec4f b);
 float Vec4f_Dot(Vec4f a, Vec4f b);
 Vec4f Vec4f_Normailze(Vec4f vec);
 float Vec4f_Magnitude(Vec4f vec);

@@ -8,6 +8,9 @@ set( SOURCEFILES
   ./src/shader.c
   ./src/application.c
   ./src/object.c
+  ./src/math/vector.c
+  ./src/math/ray.c
+  ./src/math/matrix.c
   ./include/glad.c
 )
 project(c-VR VERSION 1.0)
