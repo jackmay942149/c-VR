@@ -32,6 +32,7 @@ Application Application_Start(int width, int height) {
   }
 
   glViewport(0, 0, 800, 600);
+  glEnable(GL_DEPTH_TEST);
   Application app = {.window = window, .width = width, .height = height, .isRunning = 1};
   return app; 
 }

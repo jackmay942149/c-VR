@@ -36,9 +36,28 @@ Mat4f Mat4f_Identity() {
   return matrix;
 }
 
-// WIP
+// https://www.songho.ca/opengl/gl_projectionmatrix.html#ortho
+Mat4f Mat4f_Ortho(float left, float right, float bottom, float top, float near, float far) {
+  Vec4f a = {.x = 2/(right - left), .y = 0.0f, .z = 0.0f, .w = - (right + left)/(right - left)};
+  Vec4f b = {.x = 0.0f, .y = 2/(top - bottom), .z = 0.0f, .w = - (top + bottom)/(top - bottom)};
+  Vec4f c = {.x = 0.0f, .y = 0.0f, .z = -2/(far - near), .w = - (far + near)/(far - near)};
+  Vec4f d = {.x = 0.0f, .y = 0.0f, .z = 0.0f, .w = 1.0f};
+  Mat4f matrix = {.a = a, .b = b, .c = c, .d = d};
+  return matrix;
+}
+
+Mat4f Mat4f_Perspective(float FOVy, float aspect, float near, float far) {
+  FOVy = FOVy *  M_PI / 180.0f;
+  Vec4f a = {.x = 1/(aspect * (float) tan(FOVy/2)), .y = 0.0f, .z = 0.0f, .w = 0.0f};
+  Vec4f b = {.x = 0.0f, .y = 1/((float) tan(FOVy/2)), .z = 0.0f, .w = 0.0f};
+  Vec4f c = {.x = 0.0f, .y = 0.0f, .z = - (far + near)/(far - near), .w = -2 * far * near / (far - near)};
+  Vec4f d = {.x = 0.0f, .y = 0.0f, .z = -1.0f, .w = 0.0f};
+  Mat4f matrix = {.a = a, .b = b, .c = c, .d = d};
+  return matrix;
+}
+
 void Mat4f_Rotate(Mat4f* matrix, float angle, Vec3f rotAxis) {
-  angle =  (float) angle/ 2*M_PI;
+  angle =  (float) angle * M_PI/ 180.0f;
   
   Vec4f rotVecA = {
     .x = (float) (cos(angle) + rotAxis.x * rotAxis.x * (1 - cos(angle))),
@@ -67,4 +86,13 @@ void Mat4f_Rotate(Mat4f* matrix, float angle, Vec3f rotAxis) {
   Mat4f_Multiply(matrix, rotMatrix);
   return;
 }
+void Mat4f_Translate(Mat4f* matrix, Vec3f translation) {
+  Mat4f translateMatrix = Mat4f_Identity();
+  translateMatrix.a.w = translation.x;
+  translateMatrix.b.w = translation.y;
+  translateMatrix.c.w = translation.z;
+
+  Mat4f_Multiply(matrix, translateMatrix);
+}
+
 void Mat4f_Scale(Mat4f* matrix, Vec3f scale);

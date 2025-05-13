@@ -19,15 +19,23 @@ int main(void){
 
   // Set vertex data
   float vertices[] = {
-     0.5f,  0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-    -0.5f,  0.5f, 0.0f
+     0.5f,  0.5f,  0.5f, // 0 Right, Top, Back
+     0.5f, -0.5f,  0.5f, // 1 Right, Bottom, Back
+    -0.5f, -0.5f,  0.5f, // 2 Left, Bottom, Back
+    -0.5f,  0.5f,  0.5f, // 3 Left, Top, Back
+     0.5f,  0.5f, -0.5f, // 4 Right, Top, Front
+     0.5f, -0.5f, -0.5f, // 5 Right, Bottom, Front
+    -0.5f, -0.5f, -0.5f, // 6 Left, Bottom, Front
+    -0.5f,  0.5f, -0.5f  // 7 Left, Top, Front
   };
 
   unsigned int indices[] = {
-    0, 1, 3,
-    1, 2, 3
+    0, 1, 2, 0, 2, 3, // Back
+    4, 5, 6, 4, 6, 7, // Front
+    0, 1, 4, 1, 4, 5, // Right
+    2, 3, 6, 3, 6, 7, // Left
+    0, 3, 4, 3, 4, 7, // Top
+    1, 2, 5, 2, 5, 6  // Bottom
   };
 
   Shader vertShader = Shader_Create(VERTEX, &fileManager, "../res/default.vert");
@@ -46,16 +54,27 @@ int main(void){
 
 
   while (application.isRunning) { // application running
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glUseProgram(o1.shaderProgram.id);
     Mat4f transform = Mat4f_Identity();
-    Vec3f rotAxis = {.x = 0, .y = 0, .z = 1};
-    Mat4f_Rotate(&transform, (float) glfwGetTime(), rotAxis);
+    Vec3f rotAxis = {.x = 0, .y = 1, .z = 0};
+    Mat4f_Rotate(&transform, 120.0f * (float) glfwGetTime(), rotAxis);
+
+    Mat4f view = Mat4f_Identity();
+    Vec3f camTranslation = {.x = 0, .y = 0, .z = -3};
+    Mat4f_Translate(&view, camTranslation);
+    Mat4f projection = Mat4f_Perspective(45.0f, 800.0f/600.0f, 0.1f, 100.0f);
 
   
-    unsigned int transformLoc = glGetUniformLocation(o1.shaderProgram.id, "transform");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, (float*) &transform);  
+    unsigned int modelLoc = glGetUniformLocation(o1.shaderProgram.id, "model");
+    glUniformMatrix4fv(modelLoc, 1, GL_TRUE, (float*) &transform);
+    unsigned int viewLoc = glGetUniformLocation(o1.shaderProgram.id, "view");
+    glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (float*) &view);
+    unsigned int projectionLoc = glGetUniformLocation(o1.shaderProgram.id, "projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_TRUE, (float*) &projection);
+
+      
     glBindVertexArray(o1.VAO);       // foreach object draw
     glDrawElements(GL_TRIANGLES, o1.iCount, GL_UNSIGNED_INT, 0);
     
