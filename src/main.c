@@ -62,7 +62,7 @@ int main(void){
     Mat4f_Rotate(&transform, 120.0f * (float) glfwGetTime(), rotAxis);
 
     Mat4f view = Mat4f_Identity();
-    Vec3f camTranslation = {.x = 0, .y = 0, .z = -3};
+    Vec3f camTranslation = {.x = 0, .y = -3, .z = -10};
     Mat4f_Translate(&view, camTranslation);
     Mat4f projection = Mat4f_Perspective(45.0f, 800.0f/600.0f, 0.1f, 100.0f);
 

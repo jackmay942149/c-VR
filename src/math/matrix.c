@@ -14,12 +14,14 @@ void Mat4f_Transpose(Mat4f* m) {
   return;
 }
 
+
+// Check this might be wrong
 void Mat4f_Multiply(Mat4f* a, Mat4f b) {
-  Mat4f_Transpose(&b);
-  Vec4f vecA = {.x = Vec4f_Dot(a->a, b.a), .y = Vec4f_Dot(a->a, b.b), .z = Vec4f_Dot(a->a, b.c), .w = Vec4f_Dot(a->a, b.d)};
-  Vec4f vecB = {.x = Vec4f_Dot(a->b, b.a), .y = Vec4f_Dot(a->b, b.b), .z = Vec4f_Dot(a->b, b.c), .w = Vec4f_Dot(a->b, b.d)};
-  Vec4f vecC = {.x = Vec4f_Dot(a->c, b.a), .y = Vec4f_Dot(a->c, b.b), .z = Vec4f_Dot(a->c, b.c), .w = Vec4f_Dot(a->c, b.d)};
-  Vec4f vecD = {.x = Vec4f_Dot(a->d, b.a), .y = Vec4f_Dot(a->d, b.b), .z = Vec4f_Dot(a->d, b.c), .w = Vec4f_Dot(a->d, b.d)};
+  Mat4f_Transpose(a);
+  Vec4f vecA = {.x = Vec4f_Dot(b.a, a->a), .y = Vec4f_Dot(b.a, a->b), .z = Vec4f_Dot(b.a, a->c), .w = Vec4f_Dot(b.a, a->d)};
+  Vec4f vecB = {.x = Vec4f_Dot(b.b, a->a), .y = Vec4f_Dot(b.b, a->b), .z = Vec4f_Dot(b.b, a->c), .w = Vec4f_Dot(b.b, a->d)};
+  Vec4f vecC = {.x = Vec4f_Dot(b.c, a->a), .y = Vec4f_Dot(b.c, a->b), .z = Vec4f_Dot(b.c, a->c), .w = Vec4f_Dot(b.c, a->d)};
+  Vec4f vecD = {.x = Vec4f_Dot(b.d, a->a), .y = Vec4f_Dot(b.d, a->b), .z = Vec4f_Dot(b.d, a->c), .w = Vec4f_Dot(b.d, a->d)};
   a->a = vecA;
   a->b = vecB;
   a->c = vecC;

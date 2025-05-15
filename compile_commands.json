@@ -1,37 +1,67 @@
 [
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\main.c.obj -c C:\\dev\\c-VR\\src\\main.c",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\main.c.obj -c C:\\dev\\c-VR\\src\\main.c",
   "file": "C:\\dev\\c-VR\\src\\main.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\main.c.obj"
 },
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\color.c.obj -c C:\\dev\\c-VR\\src\\color.c",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\color.c.obj -c C:\\dev\\c-VR\\src\\color.c",
   "file": "C:\\dev\\c-VR\\src\\color.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\color.c.obj"
 },
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\file-manager.c.obj -c C:\\dev\\c-VR\\src\\file-manager.c",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\file-manager.c.obj -c C:\\dev\\c-VR\\src\\file-manager.c",
   "file": "C:\\dev\\c-VR\\src\\file-manager.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\file-manager.c.obj"
 },
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\renderer.c.obj -c C:\\dev\\c-VR\\src\\renderer.c",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\renderer.c.obj -c C:\\dev\\c-VR\\src\\renderer.c",
   "file": "C:\\dev\\c-VR\\src\\renderer.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\renderer.c.obj"
 },
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\shader.c.obj -c C:\\dev\\c-VR\\src\\shader.c",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\shader.c.obj -c C:\\dev\\c-VR\\src\\shader.c",
   "file": "C:\\dev\\c-VR\\src\\shader.c",
   "output": "CMakeFiles\\c-VR.dir\\src\\shader.c.obj"
 },
 {
   "directory": "C:/dev/c-VR/build",
-  "command": "C:\\msys64\\mingw64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\include\\glad.c.obj -c C:\\dev\\c-VR\\include\\glad.c",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\application.c.obj -c C:\\dev\\c-VR\\src\\application.c",
+  "file": "C:\\dev\\c-VR\\src\\application.c",
+  "output": "CMakeFiles\\c-VR.dir\\src\\application.c.obj"
+},
+{
+  "directory": "C:/dev/c-VR/build",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\object.c.obj -c C:\\dev\\c-VR\\src\\object.c",
+  "file": "C:\\dev\\c-VR\\src\\object.c",
+  "output": "CMakeFiles\\c-VR.dir\\src\\object.c.obj"
+},
+{
+  "directory": "C:/dev/c-VR/build",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\math\\vector.c.obj -c C:\\dev\\c-VR\\src\\math\\vector.c",
+  "file": "C:\\dev\\c-VR\\src\\math\\vector.c",
+  "output": "CMakeFiles\\c-VR.dir\\src\\math\\vector.c.obj"
+},
+{
+  "directory": "C:/dev/c-VR/build",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\math\\ray.c.obj -c C:\\dev\\c-VR\\src\\math\\ray.c",
+  "file": "C:\\dev\\c-VR\\src\\math\\ray.c",
+  "output": "CMakeFiles\\c-VR.dir\\src\\math\\ray.c.obj"
+},
+{
+  "directory": "C:/dev/c-VR/build",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\src\\math\\matrix.c.obj -c C:\\dev\\c-VR\\src\\math\\matrix.c",
+  "file": "C:\\dev\\c-VR\\src\\math\\matrix.c",
+  "output": "CMakeFiles\\c-VR.dir\\src\\math\\matrix.c.obj"
+},
+{
+  "directory": "C:/dev/c-VR/build",
+  "command": "C:\\apps\\msys2\\ucrt64\\bin\\cc.exe -IC:/dev/c-VR/./include -o CMakeFiles\\c-VR.dir\\include\\glad.c.obj -c C:\\dev\\c-VR\\include\\glad.c",
   "file": "C:\\dev\\c-VR\\include\\glad.c",
   "output": "CMakeFiles\\c-VR.dir\\include\\glad.c.obj"
 }
