@@ -11,6 +11,7 @@ set( SOURCEFILES
   ./src/math/vector.c
   ./src/math/ray.c
   ./src/math/matrix.c
+  ./src/data-structures/array.c
   ./include/glad.c
 )
 project(c-VR VERSION 1.0)

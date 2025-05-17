@@ -22,7 +22,7 @@ float Vec2f_Dot(Vec2f a, Vec2f b) {
 }
 
 float Vec2f_Magnitude(Vec2f vec) {
-  return sqrt(vec.u * vec.u + vec.v * vec.v);
+  return (float) sqrt(vec.u * vec.u + vec.v * vec.v);
 }
 
 Vec2f Vec2f_Normailze(Vec2f vec) {

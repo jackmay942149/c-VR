@@ -1,4 +1,6 @@
 #include "file-manager.h"
+#include "stdlib.h"
+#include <corecrt.h>
 
 FileManager FileManager_Init() {
  FileManager f = {.count = 0};
@@ -13,10 +15,15 @@ void FileManager_CloseAll(FileManager* fileManager) {
 
 File FileManager_OpenFile(FileManager* fileManager, char* path) {
   FILE* osFile;
-  osFile = fopen(path, "rb+");
+  errno_t err = fopen_s(&osFile, path, "rb+");
+  if (err != 0) {
+    printf("Errored on file manager open file");
+    exit(1);
+  }
 
   if (osFile == NULL) {
       printf("Error Loading File");
+      exit(1);
   }
   else {
       fseek(osFile, 0, SEEK_END);

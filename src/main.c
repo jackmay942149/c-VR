@@ -5,8 +5,28 @@
 #include "math/vector.h"
 #include "object.h"
 #include "shader.h"
+#include "data-structures/array.h"
 #include "glad.h"
 
+int main(void){
+  Array a = Array_Create(sizeof(int), 5);
+  Array_Destroy(&a);
+
+  Array b = Array_Create(sizeof(int), 2);
+  int x = 1;
+  int y = 2;
+  int z = 3;
+  Array_Insert(&b, (void*) &x);
+  Array_Insert(&b, (void*) &y);
+  Array_Insert(&b, (void*) &z);
+  int w = *(int*) Array_At(&b, 0);
+  printf("printing w = %i", w);
+}
+
+
+/*  Engine Logic. Postponing this to practice data structures. Would like to
+    work on a simplification of this main function as well
+      
 int main(void){
   // Add file loader
   FileManager fileManager = FileManager_Init();
@@ -83,6 +103,7 @@ int main(void){
 
   Application_Close(&application);
 }
+*/
 
 
   /* Software Renderer Logic

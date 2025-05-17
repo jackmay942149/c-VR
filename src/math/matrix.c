@@ -2,7 +2,7 @@
 #include "vector.h"
 #include <math.h>
 
-#define M_PI 3.14
+#define M_PI 3.14f
 
 void Mat4f_Transpose(Mat4f* m) {
   Vec4f a = {.x = m->a.x, .y = m->b.x, .z = m->c.x, .w = m->d.x};
