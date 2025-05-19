@@ -6,28 +6,43 @@
 #include "object.h"
 #include "shader.h"
 #include "data-structures/array.h"
+#include "data-structures/stack.h"
 #include "glad.h"
 
-int main(void){
-  Array a = Array_Create(sizeof(int), 5);
-  Array_Destroy(&a);
-
-  Array b = Array_Create(sizeof(int), 2);
-  int x = 1;
-  int y = 2;
-  int z = 3;
-  Array_Insert(&b, (void*) &x);
-  Array_Insert(&b, (void*) &y);
-  Array_Insert(&b, (void*) &z);
-  int w = *(int*) Array_At(&b, 0);
-  printf("printing w = %i", w);
+void printer(void* data) {
+  int value = *(int*) data;
+  printf("%i\n", value);
 }
 
+int main(void) {
+  int x = 1;
+  int y = 3;
+  int z = 4;
+  int w = 2;
 
-/*  Engine Logic. Postponing this to practice data structures. Would like to
+  Stack a = Stack_Create(sizeof(int), 2);
+  Stack_Push(&a, &x);
+  Stack_Push(&a, &y);
+  Stack_Push(&a, &z);
+  Stack_Push(&a, &w);
+
+  Stack_ForEach(&a, &printer);
+  
+  Stack_Pop(&a);
+  Stack_Pop(&a);
+  Stack_Pop(&a);
+  Stack_Pop(&a);
+  Stack_Push(&a, &w);
+
+  Stack_ForEach(&a, &printer);
+}
+
+/*
+  Engine Logic. Postponing this to practice data structures. Would like to
     work on a simplification of this main function as well
-      
-int main(void){
+
+    
+int main(void) {
   // Add file loader
   FileManager fileManager = FileManager_Init();
 

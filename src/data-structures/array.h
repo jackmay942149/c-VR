@@ -9,6 +9,8 @@ typedef struct Array {
 
 Array Array_Create(int elementSize, int capacity);
 void Array_Insert(Array* array, void* elem);
-void* Array_At(Array *array, int location);
+void* Array_At(Array* array, int location);
+void Array_InsertAt(Array* array, void* elem, int location);
+void Array_ForEach(Array* array, void (*func)(void*));
 void Array_Destroy(Array* array);
 #endif

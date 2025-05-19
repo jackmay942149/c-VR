@@ -20,8 +20,7 @@ Array Array_Create(int elementSize, int capacity){
   return a;
 }
 
-void Array_Insert(Array *array, void* elem){
-  if (array->count == array->capacity) {
+static void Array_Realloc(Array *array){
     void* ptr = realloc(array->data, array->elementSize * array->capacity * 2);
     if (ptr == NULL){
       printf("OOM Error\n");
@@ -30,8 +29,12 @@ void Array_Insert(Array *array, void* elem){
     array->data = ptr;
     array->capacity *= 2;
     printf("Reallocated area to hold %i bytes\n", array->capacity * array->elementSize);
+}
+
+void Array_Insert(Array *array, void* elem){
+  if (array->count == array->capacity){
+    Array_Realloc(array);
   }
-  
   void* insertLocation = (char*) array->data + array->count * array->elementSize;
   memcpy(insertLocation, elem, array->elementSize);
   array->count++;
@@ -45,7 +48,31 @@ void* Array_At(Array *array, int location){
   return (char*) array->data + array->elementSize * location;
 }
 
-void Array_Destroy(Array *array) {
+void Array_InsertAt(Array* array, void *elem, int location){
+  if (location >= array->count) {
+    Array_Insert(array, elem);
+    return;
+  }
+  if (array->count == array->capacity){
+    Array_Realloc(array);
+  }
+  for (int i = array->count; i > location; i--) {
+    void* insertLocation = (char*) array->data + i * array->elementSize;
+    memcpy(insertLocation, Array_At(array, i-1), array->elementSize);
+  }
+  void* insertLocation = (char*) array->data + location * array->elementSize;
+  memcpy(insertLocation, elem, array->elementSize);
+  array->count++;
+}
+
+void Array_ForEach(Array *array, void (*func)(void *)){
+  for (int i = 0; i < array->count; i++) {
+    void* location = (char*) array->data + i * array->elementSize;
+    func(location);
+  }  
+}
+
+void Array_Destroy(Array *array){
   free(array->data);
   array->data = NULL;
   printf("Freed Array\n");
