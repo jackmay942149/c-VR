@@ -1,6 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 #include "array.h"
+
 typedef struct Stack {
   void* data;
   int elementSize;
@@ -15,4 +16,5 @@ void* Stack_Peek(Stack* stack);
 void Stack_ForEach(Stack* stack, void (*func)(void*));
 Array Stack_ToArray(Stack* stack);
 void Stack_Destroy(Stack* stack);
+
 #endif
